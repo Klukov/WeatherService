@@ -1,6 +1,6 @@
 package com.piotrklukowski.weatherservice.exception;
 
-public class LackOfProviderException extends RuntimeException {
+public class LackOfProviderException extends WeatherServiceException {
 
     private static final String DEFAULT_EXCEPTION_MESSAGE = "Called provider doesn't exist";
 
