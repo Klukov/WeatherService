@@ -2,7 +2,7 @@ package com.piotrklukowski.weatherservice.service.provider.openweather.converter
 
 import com.piotrklukowski.weatherservice.dto.GeolocationDto;
 import com.piotrklukowski.weatherservice.dto.WeatherDto;
-import com.piotrklukowski.weatherservice.service.provider.openweather.data.currentweather.Response;
+import com.piotrklukowski.weatherservice.service.provider.openweather.data.currentweather.CurrentWeatherResponse;
 import com.piotrklukowski.weatherservice.service.provider.openweather.data.currentweather.Weather;
 
 public final class CurrentWeatherConverter {
@@ -10,31 +10,36 @@ public final class CurrentWeatherConverter {
     private CurrentWeatherConverter() {
     }
 
-    public static WeatherDto convert(Response response, String providerName) {
+    public static WeatherDto convert(CurrentWeatherResponse currentWeatherResponse, String providerName) {
         WeatherDto.WeatherDtoBuilder weatherDtoBuilder = WeatherDto.builder().providerName(providerName);
-        if (response.getCoord() != null) {
+        if (currentWeatherResponse.getCoord() != null) {
             weatherDtoBuilder.geolocationDto(
-                    new GeolocationDto(response.getCoord().getLat(), response.getCoord().getLon()));
+                    new GeolocationDto(
+                            currentWeatherResponse.getCoord().getLat(),
+                            currentWeatherResponse.getCoord().getLon()));
         }
-        if (response.getMain() != null) {
+        if (currentWeatherResponse.getMain() != null) {
             weatherDtoBuilder
-                    .temperature(response.getMain().getTemp())
-                    .pressure(response.getMain().getPressure());
+                    .temperature(currentWeatherResponse.getMain().getTemp())
+                    .pressure((float)currentWeatherResponse.getMain().getPressure());
         }
-        if (!response.getWeather().isEmpty()) {
+        if (!currentWeatherResponse.getWeather().isEmpty()) {
             StringBuilder weatherDescription = new StringBuilder();
-            for (Weather weather : response.getWeather()) {
+            for (Weather weather : currentWeatherResponse.getWeather()) {
                 weatherDescription.append(weather.getDescription());
                 weatherDescription.append(", ");
             }
-            weatherDescription.deleteCharAt(weatherDescription.length() - 1);
-            weatherDescription.deleteCharAt(weatherDescription.length() - 1);
+            if (!currentWeatherResponse.getWeather().isEmpty()) {
+                weatherDescription.deleteCharAt(weatherDescription.length() - 1);
+                weatherDescription.deleteCharAt(weatherDescription.length() - 1);
+            }
             weatherDtoBuilder.weatherType(weatherDescription.toString());
         }
-        if (response.getSys() != null) {
-            weatherDtoBuilder.locationName(response.getSys().getCountry() + ", " + response.getName());
+        if (currentWeatherResponse.getSys() != null && currentWeatherResponse.getSys().getCountry() != null) {
+            weatherDtoBuilder.locationName(
+                    currentWeatherResponse.getSys().getCountry() + ", " + currentWeatherResponse.getName());
         } else {
-            weatherDtoBuilder.locationName(response.getName());
+            weatherDtoBuilder.locationName(currentWeatherResponse.getName());
         }
         return weatherDtoBuilder.build();
     }

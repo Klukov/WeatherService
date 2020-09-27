@@ -5,7 +5,7 @@ import com.piotrklukowski.weatherservice.ExternalApiProperties;
 import com.piotrklukowski.weatherservice.dto.WeatherDto;
 import com.piotrklukowski.weatherservice.service.provider.WeatherProvider;
 import com.piotrklukowski.weatherservice.service.provider.openweather.converter.CurrentWeatherConverter;
-import com.piotrklukowski.weatherservice.service.provider.openweather.data.currentweather.Response;
+import com.piotrklukowski.weatherservice.service.provider.openweather.data.currentweather.CurrentWeatherResponse;
 import com.piotrklukowski.weatherservice.utils.HttpUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -37,7 +37,8 @@ public class OpenWeather implements WeatherProvider {
         parameters.put("appid", secretKey);
         return CurrentWeatherConverter.convert(
                 new Gson().fromJson(
-                        HttpUtils.get(PROVIDER_NAME, CURRENT_WEATHER_URL, parameters).body(), Response.class),
-                PROVIDER_NAME);
+                        HttpUtils.get(PROVIDER_NAME, CURRENT_WEATHER_URL, parameters).body(),
+                        CurrentWeatherResponse.class
+                ), PROVIDER_NAME);
     }
 }

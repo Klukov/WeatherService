@@ -1,11 +1,12 @@
 package com.piotrklukowski.weatherservice.dto;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 @AllArgsConstructor
-@Builder
+@Builder(access = AccessLevel.PUBLIC)
 public final class WeatherDto {
 
     @Getter
@@ -21,13 +22,13 @@ public final class WeatherDto {
      * Temperature in celsius
      */
     @Getter
-    private final float temperature;
+    private final Float temperature;
 
     /**
      * Pressure in hPa
      */
     @Getter
-    private final double pressure;
+    private final Float pressure;
 
     @Getter
     private final String weatherType;

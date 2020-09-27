@@ -3,7 +3,7 @@ package com.piotrklukowski.weatherservice.service.provider.weatherbit.converter;
 import com.piotrklukowski.weatherservice.dto.GeolocationDto;
 import com.piotrklukowski.weatherservice.dto.WeatherDto;
 import com.piotrklukowski.weatherservice.service.provider.weatherbit.data.currentweather.Datum;
-import com.piotrklukowski.weatherservice.service.provider.weatherbit.data.currentweather.Response;
+import com.piotrklukowski.weatherservice.service.provider.weatherbit.data.currentweather.CurrentWeatherResponse;
 
 import java.util.List;
 
@@ -11,18 +11,18 @@ public final class CurrentWeatherConverter {
     private CurrentWeatherConverter() {
     }
 
-    public static WeatherDto convert(Response response, String providerName) {
-        if (Integer.parseInt(response.getCount()) < 1 || response.getData().isEmpty()) {
+    public static WeatherDto convert(CurrentWeatherResponse currentWeatherResponse, String providerName) {
+        if (Integer.parseInt(currentWeatherResponse.getCount()) < 1 || currentWeatherResponse.getData().isEmpty()) {
             return WeatherDto.builder()
                     .providerName(providerName)
                     .build();
         }
-        Datum weatherData = response.getData().get(0);
+        Datum weatherData = currentWeatherResponse.getData().get(0);
         return WeatherDto.builder()
                 .providerName(providerName)
                 .geolocationDto(new GeolocationDto(weatherData.getLat(), weatherData.getLon()))
-                .temperature(getAverageTemperature(response.getData()))
-                .pressure(getAveragePressure(response.getData()))
+                .temperature(getAverageTemperature(currentWeatherResponse.getData()))
+                .pressure(getAveragePressure(currentWeatherResponse.getData()))
                 .weatherType(weatherData.getWeather().getDescription())
                 .locationName(weatherData.getCountryCode() + ", " + weatherData.getCityName())
                 .build();

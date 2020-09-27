@@ -31,7 +31,7 @@ public class Datum {
     private Float vis;
     @SerializedName("rh")
     @Expose
-    private Integer rh;
+    private Float rh;
     @SerializedName("dewpt")
     @Expose
     private Float dewpt;
@@ -178,11 +178,11 @@ public class Datum {
         this.vis = vis;
     }
 
-    public Integer getRh() {
+    public Float getRh() {
         return rh;
     }
 
-    public void setRh(Integer rh) {
+    public void setRh(Float rh) {
         this.rh = rh;
     }
 

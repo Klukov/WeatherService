@@ -33,7 +33,7 @@ public final class CurrentWeatherResponse {
          * Temperature in celsius
          */
         @Getter
-        private final float temperature;
+        private final Float temperature;
 
         @Getter
         private final String weatherType;

@@ -1,5 +1,7 @@
 package com.piotrklukowski.weatherservice.rest.v1.publicdomain.controller;
 
+import com.piotrklukowski.weatherservice.dto.WeatherDto;
+import com.piotrklukowski.weatherservice.exception.WeatherServiceException;
 import com.piotrklukowski.weatherservice.rest.v1.exception.ExceptionDecorator;
 import com.piotrklukowski.weatherservice.rest.v1.exception.WrongRequestParametersException;
 import com.piotrklukowski.weatherservice.rest.v1.publicdomain.model.converter.WeatherDtoToCurrentWeatherResponseConverter;
@@ -34,11 +36,18 @@ public class CurrentWeatherController {
             throw new WrongRequestParametersException("Following providers are not supported: " + invalidProviderNames);
         }
         return ExceptionDecorator.wrap(() ->
-                WeatherDtoToCurrentWeatherResponseConverter.convert(
-                        providers.stream()
-                                .map(provider -> weatherProviderManager.getWeatherService(provider)
-                                        .getCurrentWeather(latitude, longitude))
-                                .collect(Collectors.toList())
+                WeatherDtoToCurrentWeatherResponseConverter.convert(providers.stream().map(provider -> {
+                            try {
+                                return weatherProviderManager.getWeatherService(provider)
+                                        .getCurrentWeather(latitude, longitude);
+                            } catch (WeatherServiceException e) {
+                                log.warn("Error during connection to external service", e);
+                                return WeatherDto.builder().providerName(provider).build();
+                            } catch (Exception e) {
+                                log.error("Unhandled Error during mapping to DTO object", e);
+                                return WeatherDto.builder().providerName(provider).build();
+                            }
+                        }).collect(Collectors.toList())
                 ));
     }
 
