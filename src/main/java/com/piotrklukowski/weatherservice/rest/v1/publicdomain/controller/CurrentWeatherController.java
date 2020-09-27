@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path = "weather-service/api/v1/public-domain/")
+@RequestMapping(path = "weather-service/api/v1/public-domain/", produces="application/json")
 @Slf4j
 public class CurrentWeatherController {
 

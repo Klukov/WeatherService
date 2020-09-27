@@ -2,6 +2,7 @@ package com.piotrklukowski.weatherservice.rest.v1.publicdomain.model.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public final class CurrentWeatherResponse {
 
+    @Getter
     private final List<Weather> weathers = new ArrayList<>();
 
     public void addWeather(Weather weather) {
@@ -24,8 +26,13 @@ public final class CurrentWeatherResponse {
     @AllArgsConstructor
     @Builder
     public static final class Weather {
+        @Getter
         private final String provider;
+
+        @Getter
         private final float temperature;
+
+        @Getter
         private final String weatherType;
     }
 }

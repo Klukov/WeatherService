@@ -20,7 +20,7 @@ public class Datum {
     private String timezone;
     @SerializedName("lat")
     @Expose
-    private Integer lat;
+    private Float lat;
     @SerializedName("lon")
     @Expose
     private Float lon;
@@ -29,13 +29,13 @@ public class Datum {
     private String station;
     @SerializedName("vis")
     @Expose
-    private Integer vis;
+    private Float vis;
     @SerializedName("rh")
     @Expose
     private Integer rh;
     @SerializedName("dewpt")
     @Expose
-    private Integer dewpt;
+    private Float dewpt;
     @SerializedName("wind_dir")
     @Expose
     private Integer windDir;
@@ -68,7 +68,7 @@ public class Datum {
     private String obTime;
     @SerializedName("ts")
     @Expose
-    private Integer ts;
+    private Float ts;
     @SerializedName("sunrise")
     @Expose
     private String sunrise;
@@ -80,10 +80,10 @@ public class Datum {
     private Float slp;
     @SerializedName("pres")
     @Expose
-    private Integer pres;
+    private Float pres;
     @SerializedName("aqi")
     @Expose
-    private Integer aqi;
+    private Float aqi;
     @SerializedName("uv")
     @Expose
     private Float uv;
@@ -101,19 +101,19 @@ public class Datum {
     private Float dhi;
     @SerializedName("elev_angle")
     @Expose
-    private Integer elevAngle;
+    private Float elevAngle;
     @SerializedName("hour_angle")
     @Expose
-    private Integer hourAngle;
+    private Float hourAngle;
     @SerializedName("pod")
     @Expose
     private String pod;
     @SerializedName("precip")
     @Expose
-    private Integer precip;
+    private Float precip;
     @SerializedName("snow")
     @Expose
-    private Integer snow;
+    private Float snow;
 
     public String getCityName() {
         return cityName;
@@ -147,11 +147,11 @@ public class Datum {
         this.timezone = timezone;
     }
 
-    public Integer getLat() {
+    public Float getLat() {
         return lat;
     }
 
-    public void setLat(Integer lat) {
+    public void setLat(Float lat) {
         this.lat = lat;
     }
 
@@ -171,11 +171,11 @@ public class Datum {
         this.station = station;
     }
 
-    public Integer getVis() {
+    public Float getVis() {
         return vis;
     }
 
-    public void setVis(Integer vis) {
+    public void setVis(Float vis) {
         this.vis = vis;
     }
 
@@ -187,11 +187,11 @@ public class Datum {
         this.rh = rh;
     }
 
-    public Integer getDewpt() {
+    public Float getDewpt() {
         return dewpt;
     }
 
-    public void setDewpt(Integer dewpt) {
+    public void setDewpt(Float dewpt) {
         this.dewpt = dewpt;
     }
 
@@ -275,11 +275,11 @@ public class Datum {
         this.obTime = obTime;
     }
 
-    public Integer getTs() {
+    public Float getTs() {
         return ts;
     }
 
-    public void setTs(Integer ts) {
+    public void setTs(Float ts) {
         this.ts = ts;
     }
 
@@ -307,19 +307,19 @@ public class Datum {
         this.slp = slp;
     }
 
-    public Integer getPres() {
+    public Float getPres() {
         return pres;
     }
 
-    public void setPres(Integer pres) {
+    public void setPres(Float pres) {
         this.pres = pres;
     }
 
-    public Integer getAqi() {
+    public Float getAqi() {
         return aqi;
     }
 
-    public void setAqi(Integer aqi) {
+    public void setAqi(Float aqi) {
         this.aqi = aqi;
     }
 
@@ -363,19 +363,19 @@ public class Datum {
         this.dhi = dhi;
     }
 
-    public Integer getElevAngle() {
+    public Float getElevAngle() {
         return elevAngle;
     }
 
-    public void setElevAngle(Integer elevAngle) {
+    public void setElevAngle(Float elevAngle) {
         this.elevAngle = elevAngle;
     }
 
-    public Integer getHourAngle() {
+    public Float getHourAngle() {
         return hourAngle;
     }
 
-    public void setHourAngle(Integer hourAngle) {
+    public void setHourAngle(Float hourAngle) {
         this.hourAngle = hourAngle;
     }
 
@@ -387,19 +387,19 @@ public class Datum {
         this.pod = pod;
     }
 
-    public Integer getPrecip() {
+    public Float getPrecip() {
         return precip;
     }
 
-    public void setPrecip(Integer precip) {
+    public void setPrecip(Float precip) {
         this.precip = precip;
     }
 
-    public Integer getSnow() {
+    public Float getSnow() {
         return snow;
     }
 
-    public void setSnow(Integer snow) {
+    public void setSnow(Float snow) {
         this.snow = snow;
     }
 
