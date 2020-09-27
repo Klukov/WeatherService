@@ -38,7 +38,7 @@ public class CurrentWeatherController {
         return ExceptionDecorator.wrap(() ->
                 WeatherDtoToCurrentWeatherResponseConverter.convert(providers.stream().map(provider -> {
                             try {
-                                return weatherProviderManager.getWeatherService(provider)
+                                return weatherProviderManager.getWeatherProvider(provider)
                                         .getCurrentWeather(latitude, longitude);
                             } catch (WeatherServiceException e) {
                                 log.warn("Error during connection to external service", e);

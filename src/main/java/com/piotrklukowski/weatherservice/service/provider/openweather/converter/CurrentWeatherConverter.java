@@ -21,7 +21,7 @@ public final class CurrentWeatherConverter {
         if (currentWeatherResponse.getMain() != null) {
             weatherDtoBuilder
                     .temperature(currentWeatherResponse.getMain().getTemp())
-                    .pressure((float)currentWeatherResponse.getMain().getPressure());
+                    .pressure((float) currentWeatherResponse.getMain().getPressure());
         }
         if (!currentWeatherResponse.getWeather().isEmpty()) {
             StringBuilder weatherDescription = new StringBuilder();

@@ -1,4 +1,3 @@
-
 package com.piotrklukowski.weatherservice.service.provider.accuweather.data.location;
 
 import com.google.gson.annotations.Expose;

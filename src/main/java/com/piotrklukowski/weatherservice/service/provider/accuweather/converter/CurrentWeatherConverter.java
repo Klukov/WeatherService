@@ -7,7 +7,8 @@ import com.piotrklukowski.weatherservice.service.provider.accuweather.data.locat
 import com.piotrklukowski.weatherservice.service.provider.accuweather.data.location.LocationResponse;
 
 public final class CurrentWeatherConverter {
-    private CurrentWeatherConverter() {}
+    private CurrentWeatherConverter() {
+    }
 
     public static WeatherDto convert(
             CurrentWeatherResponse[] currentWeatherResponse,

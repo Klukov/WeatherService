@@ -48,7 +48,7 @@ public class AccuWeather implements WeatherProvider {
         String requestURL = CURRENT_WEATHER_URL + locationResponse.getKey();
         return CurrentWeatherConverter.convert(
                 new Gson().fromJson(
-                        HttpUtils.get(PROVIDER_NAME,requestURL, parameters).body(),
+                        HttpUtils.get(PROVIDER_NAME, requestURL, parameters).body(),
                         CurrentWeatherResponse[].class),
                 locationResponse,
                 PROVIDER_NAME

@@ -4,5 +4,5 @@ import com.piotrklukowski.weatherservice.dto.WeatherDto;
 
 public interface WeatherProvider {
 
-    public WeatherDto getCurrentWeather(float latitude, float longitude);
+    WeatherDto getCurrentWeather(float latitude, float longitude);
 }

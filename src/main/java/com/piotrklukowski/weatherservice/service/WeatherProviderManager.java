@@ -22,7 +22,7 @@ public final class WeatherProviderManager {
         weatherServiceMap.put(AccuWeather.PROVIDER_NAME, AccuWeather.class);
     }
 
-    public final WeatherProvider getWeatherService(String provider) {
+    public final WeatherProvider getWeatherProvider(String provider) {
         try {
             return weatherServiceMap.get(provider).getDeclaredConstructor().newInstance();
         } catch (Exception e) {

@@ -2,8 +2,8 @@ package com.piotrklukowski.weatherservice.service.provider.weatherbit.converter;
 
 import com.piotrklukowski.weatherservice.dto.GeolocationDto;
 import com.piotrklukowski.weatherservice.dto.WeatherDto;
-import com.piotrklukowski.weatherservice.service.provider.weatherbit.data.currentweather.Datum;
 import com.piotrklukowski.weatherservice.service.provider.weatherbit.data.currentweather.CurrentWeatherResponse;
+import com.piotrklukowski.weatherservice.service.provider.weatherbit.data.currentweather.Datum;
 
 import java.util.List;
 
