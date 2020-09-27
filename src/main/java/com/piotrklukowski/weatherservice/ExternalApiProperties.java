@@ -6,7 +6,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
 @Configuration
-@PropertySource(value = { "classpath:externalApi.properties" }, ignoreResourceNotFound = false)
+@PropertySource(value = {"classpath:externalApi.properties"}, ignoreResourceNotFound = false)
 public class ExternalApiProperties implements EnvironmentAware {
 
     private static Environment env;

@@ -1,9 +1,9 @@
 package com.piotrklukowski.weatherservice.service;
 
 import com.piotrklukowski.weatherservice.exception.LackOfProviderException;
-import com.piotrklukowski.weatherservice.service.provider.AccuWeather;
-import com.piotrklukowski.weatherservice.service.provider.OpenWeather;
 import com.piotrklukowski.weatherservice.service.provider.WeatherProvider;
+import com.piotrklukowski.weatherservice.service.provider.accuweather.AccuWeather;
+import com.piotrklukowski.weatherservice.service.provider.openweather.OpenWeather;
 import com.piotrklukowski.weatherservice.service.provider.weatherbit.WeatherBit;
 import lombok.extern.log4j.Log4j2;
 

@@ -1,11 +1,11 @@
-package com.piotrklukowski.weatherservice.service.provider.weatherbit;
+package com.piotrklukowski.weatherservice.service.provider.openweather;
 
 import com.google.gson.Gson;
 import com.piotrklukowski.weatherservice.ExternalApiProperties;
 import com.piotrklukowski.weatherservice.dto.WeatherDto;
 import com.piotrklukowski.weatherservice.service.provider.WeatherProvider;
-import com.piotrklukowski.weatherservice.service.provider.weatherbit.converter.CurrentWeatherConverter;
-import com.piotrklukowski.weatherservice.service.provider.weatherbit.data.currentweather.Response;
+import com.piotrklukowski.weatherservice.service.provider.openweather.converter.CurrentWeatherConverter;
+import com.piotrklukowski.weatherservice.service.provider.openweather.data.currentweather.Response;
 import com.piotrklukowski.weatherservice.utils.HttpUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -15,16 +15,16 @@ import java.util.Map;
 
 @Slf4j
 @Component
-public class WeatherBit implements WeatherProvider {
+public class OpenWeather implements WeatherProvider {
 
-    public final static String PROVIDER_NAME = "WeatherBit";
-    private final static String PROVIDER_URL = "https://api.weatherbit.io/v2.0/";
-    private final static String CURRENT_WEATHER_URL = PROVIDER_URL + "current";
-    private final static String KEY_IDENTIFIER = "app.provider.weatherbit.key";
+    public final static String PROVIDER_NAME = "OpenWeather";
+    private final static String PROVIDER_URL = "https://api.openweathermap.org/data/2.5/";
+    private final static String CURRENT_WEATHER_URL = PROVIDER_URL + "weather";
+    private final static String KEY_IDENTIFIER = "app.provider.openweather.key";
 
     private final String secretKey;
 
-    public WeatherBit() {
+    public OpenWeather() {
         this.secretKey = ExternalApiProperties.getProperty(KEY_IDENTIFIER);
     }
 
@@ -33,7 +33,8 @@ public class WeatherBit implements WeatherProvider {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("lat", String.valueOf(latitude));
         parameters.put("lon", String.valueOf(longitude));
-        parameters.put("key", secretKey);
+        parameters.put("units", "metric");
+        parameters.put("appid", secretKey);
         return CurrentWeatherConverter.convert(
                 new Gson().fromJson(
                         HttpUtils.get(PROVIDER_NAME, CURRENT_WEATHER_URL, parameters).body(), Response.class),

@@ -29,10 +29,16 @@ public final class CurrentWeatherResponse {
         @Getter
         private final String provider;
 
+        /**
+         * Temperature in celsius
+         */
         @Getter
         private final float temperature;
 
         @Getter
         private final String weatherType;
+
+        @Getter
+        private final String placeName;
     }
 }

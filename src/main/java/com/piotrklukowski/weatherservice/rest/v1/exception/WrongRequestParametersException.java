@@ -5,6 +5,6 @@ import org.springframework.http.HttpStatus;
 public class WrongRequestParametersException extends WeatherServiceWebException {
 
     public WrongRequestParametersException(String reason) {
-        super(HttpStatus.BAD_REQUEST,reason);
+        super(HttpStatus.BAD_REQUEST, reason);
     }
 }

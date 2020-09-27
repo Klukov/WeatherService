@@ -1,4 +1,5 @@
 package com.piotrklukowski.weatherservice.rest.v1.exception;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 

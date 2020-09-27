@@ -8,20 +8,23 @@ import com.piotrklukowski.weatherservice.service.provider.weatherbit.data.curren
 import java.util.List;
 
 public final class CurrentWeatherConverter {
-    private CurrentWeatherConverter() {}
+    private CurrentWeatherConverter() {
+    }
 
     public static WeatherDto convert(Response response, String providerName) {
-        if (Integer.parseInt(response.getCount()) < 1) {
+        if (Integer.parseInt(response.getCount()) < 1 || response.getData().isEmpty()) {
             return WeatherDto.builder()
                     .providerName(providerName)
                     .build();
         }
+        Datum weatherData = response.getData().get(0);
         return WeatherDto.builder()
                 .providerName(providerName)
-                .geolocationDto(new GeolocationDto(response.getData().get(0).getLat(), response.getData().get(0).getLon()))
+                .geolocationDto(new GeolocationDto(weatherData.getLat(), weatherData.getLon()))
                 .temperature(getAverageTemperature(response.getData()))
                 .pressure(getAveragePressure(response.getData()))
-                .weatherType(response.getData().get(0).getWeather().getDescription())
+                .weatherType(weatherData.getWeather().getDescription())
+                .locationName(weatherData.getCountryCode() + ", " + weatherData.getCityName())
                 .build();
     }
 
@@ -30,7 +33,7 @@ public final class CurrentWeatherConverter {
         for (Datum datum : data) {
             temp += datum.getTemp();
         }
-        return (float) temp/data.size();
+        return (float) temp / data.size();
     }
 
     private static float getAveragePressure(List<Datum> data) {
@@ -38,6 +41,6 @@ public final class CurrentWeatherConverter {
         for (Datum datum : data) {
             pressure += datum.getPres();
         }
-        return (float) pressure/data.size();
+        return (float) pressure / data.size();
     }
 }

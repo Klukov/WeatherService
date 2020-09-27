@@ -1,4 +1,3 @@
-
 package com.piotrklukowski.weatherservice.service.provider.weatherbit.data.currentweather;
 
 import com.google.gson.annotations.Expose;

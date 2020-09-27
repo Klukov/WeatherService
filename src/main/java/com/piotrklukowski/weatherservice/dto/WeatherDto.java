@@ -17,9 +17,15 @@ public final class WeatherDto {
     @Getter
     private final GeolocationDto geolocationDto;
 
+    /**
+     * Temperature in celsius
+     */
     @Getter
     private final float temperature;
 
+    /**
+     * Pressure in hPa
+     */
     @Getter
     private final double pressure;
 

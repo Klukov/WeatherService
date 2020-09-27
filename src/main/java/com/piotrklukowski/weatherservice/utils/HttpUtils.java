@@ -12,9 +12,27 @@ import java.util.Map;
 
 @Slf4j
 public final class HttpUtils {
-    private HttpUtils() {}
+    private HttpUtils() {
+    }
 
-    public static HttpResponse<String> get(String path, Map<String, String> requestParameters) {
+    public static HttpResponse<String> get(String providerName, String path, Map<String, String> requestParameters) {
+        HttpResponse<String> response;
+        try {
+            response = HttpClient.newHttpClient().send(
+                    createGetHttpRequest(generateRequestUri(path, requestParameters)),
+                    HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            log.error("Failure of Http call to " + path);
+            throw new HttpRequestException("Failure during call to external api: " + path);
+        }
+        if (response.statusCode() != 200) {
+            log.error("Request to: " + path + " ended with status code " + response.statusCode());
+            throw new HttpRequestException("Not OK status after call to: " + providerName);
+        }
+        return response;
+    }
+
+    private static String generateRequestUri(String path, Map<String, String> requestParameters) {
         StringBuilder requestURI = new StringBuilder(path);
         if (requestParameters != null && !requestParameters.isEmpty()) {
             requestURI.append("?");
@@ -27,17 +45,14 @@ public final class HttpUtils {
             });
             requestURI.deleteCharAt(requestURI.length() - 1);
         }
-        HttpClient httpClient = HttpClient.newHttpClient();
-        HttpRequest httpRequest = HttpRequest.newBuilder()
-                .uri(URI.create(requestURI.toString()))
+        return requestURI.toString();
+    }
+
+    private static HttpRequest createGetHttpRequest(String requestUri) {
+        return HttpRequest.newBuilder()
+                .uri(URI.create(requestUri))
                 .GET()
                 .build();
-        try {
-            return httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException | InterruptedException e) {
-            log.error("Failure of Http call to " + path);
-            throw new HttpRequestException("Failure during call to external api: " + path);
-        }
     }
 
 }
