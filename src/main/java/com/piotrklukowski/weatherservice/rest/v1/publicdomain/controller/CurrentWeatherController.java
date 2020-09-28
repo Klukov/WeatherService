@@ -34,7 +34,7 @@ public class CurrentWeatherController {
             log.info("Get current weather request with invalid providers: " + invalidProviderNames);
             throw new WrongRequestParametersException("Following providers are not supported: " + invalidProviderNames);
         }
-        return WeatherDtoToCurrentWeatherResponseConverter.convert(providers.stream().map(provider -> {
+        return WeatherDtoToCurrentWeatherResponseConverter.convert(providers.stream().parallel().map(provider -> {
                     try {
                         return weatherProviderManager.getWeatherProvider(provider)
                                 .getCurrentWeather(latitude, longitude);
