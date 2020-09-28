@@ -8,13 +8,11 @@ import com.piotrklukowski.weatherservice.service.provider.weatherbit.converter.C
 import com.piotrklukowski.weatherservice.service.provider.weatherbit.data.currentweather.CurrentWeatherResponse;
 import com.piotrklukowski.weatherservice.utils.HttpUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-@Component
 public class WeatherBit implements WeatherProvider {
 
     public final static String PROVIDER_NAME = "WeatherBit";

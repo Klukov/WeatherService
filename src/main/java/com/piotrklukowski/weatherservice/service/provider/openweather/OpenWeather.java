@@ -8,13 +8,11 @@ import com.piotrklukowski.weatherservice.service.provider.openweather.converter.
 import com.piotrklukowski.weatherservice.service.provider.openweather.data.currentweather.CurrentWeatherResponse;
 import com.piotrklukowski.weatherservice.utils.HttpUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-@Component
 public class OpenWeather implements WeatherProvider {
 
     public final static String PROVIDER_NAME = "OpenWeather";

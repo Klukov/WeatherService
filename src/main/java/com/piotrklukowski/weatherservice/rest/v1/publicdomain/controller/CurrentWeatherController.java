@@ -2,7 +2,6 @@ package com.piotrklukowski.weatherservice.rest.v1.publicdomain.controller;
 
 import com.piotrklukowski.weatherservice.dto.WeatherDto;
 import com.piotrklukowski.weatherservice.exception.WeatherServiceException;
-import com.piotrklukowski.weatherservice.rest.v1.exception.ExceptionDecorator;
 import com.piotrklukowski.weatherservice.rest.v1.exception.WrongRequestParametersException;
 import com.piotrklukowski.weatherservice.rest.v1.publicdomain.model.converter.WeatherDtoToCurrentWeatherResponseConverter;
 import com.piotrklukowski.weatherservice.rest.v1.publicdomain.model.response.CurrentWeatherResponse;
@@ -35,20 +34,19 @@ public class CurrentWeatherController {
             log.info("Get current weather request with invalid providers: " + invalidProviderNames);
             throw new WrongRequestParametersException("Following providers are not supported: " + invalidProviderNames);
         }
-        return ExceptionDecorator.wrap(() ->
-                WeatherDtoToCurrentWeatherResponseConverter.convert(providers.stream().map(provider -> {
-                            try {
-                                return weatherProviderManager.getWeatherProvider(provider)
-                                        .getCurrentWeather(latitude, longitude);
-                            } catch (WeatherServiceException e) {
-                                log.warn("Error during connection to external service", e);
-                                return WeatherDto.builder().providerName(provider).build();
-                            } catch (Exception e) {
-                                log.error("Unhandled Error during mapping to DTO object", e);
-                                return WeatherDto.builder().providerName(provider).build();
-                            }
-                        }).collect(Collectors.toList())
-                ));
+        return WeatherDtoToCurrentWeatherResponseConverter.convert(providers.stream().map(provider -> {
+                    try {
+                        return weatherProviderManager.getWeatherProvider(provider)
+                                .getCurrentWeather(latitude, longitude);
+                    } catch (WeatherServiceException e) {
+                        log.warn("Error during connection to external service", e);
+                        return WeatherDto.builder().providerName(provider).build();
+                    } catch (Exception e) {
+                        log.error("Unhandled Error during mapping to DTO object", e);
+                        return WeatherDto.builder().providerName(provider).build();
+                    }
+                }).collect(Collectors.toList())
+        );
     }
 
     /**
